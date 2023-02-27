@@ -20,5 +20,7 @@ from a practice tool to a fun online synthesizer. Users will have the ability to
 again, spending less time configuring and more time playing.
 
 Harmonicello uses Javascript, HTML, CSS, Web Audio API, and the Web Storage API.
+
+Check out <a href="https://spontaneous-bonbon-3e95b3.netlify.app/"> Harmonicello </a>
 # View Harmonicello
 <img width="1440" alt="harmonicello-view" src="https://user-images.githubusercontent.com/71400942/211226399-73f4244f-9403-472f-b18a-d0ba60a8927e.png">
