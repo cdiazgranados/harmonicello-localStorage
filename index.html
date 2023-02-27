@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" href="./waveform-logo-lg.png" />
+    <title>Harmonicello</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img
+            src="./waveform-logo-lg.png"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+          />
+          Harmonicello
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="https://github.com/cdiazgranados/harmonicello"
+                target="_blank"
+                >About</a
+              >
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="http://localhost:8080" target="_blank"
+                >Companion API</a
+              >
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row justify-content-evenly align-items-center">
+        <div class="col-lg-4">
+          <div class="harmonicello">
+            <!-- EXTRA DIV makes the rows vertical -->
+            <div class="string" id="3">
+              <button
+                class="open-strings string-four"
+                id="string-four"
+                data-note=""
+              >
+                C
+            </button>
+              <button class="note string-four" data-note="">2</button>
+              <button class="note string-four" data-note="">3</button>
+              <button class="note string-four" data-note="">4</button>
+              <button class="note string-four" data-note="">5</button>
+              <button class="note string-four" data-note="">6</button>
+              <button class="note string-four" data-note="">7</button>
+              <button class="note string-four" data-note="">8</button>
+            </div>
+            <div class="string" id="2">
+              <button
+                class="open-strings string-three"
+                id="string-three"
+                data-note=""
+              >
+                G
+              </button>
+              <button class="note string-three" data-note="">2</button>
+              <button class="note string-three" data-note="">3</button>
+              <button class="note string-three" data-note="">4</button>
+              <button class="note string-three" data-note="">5</button>
+              <button class="note string-three" data-note="">6</button>
+              <button class="note string-three" data-note="">7</button>
+              <button class="note string-three" data-note="">8</button>
+            </div>
+            <div class="string" id="1">
+              <button class="open-strings string-two" id="string-two" data-note="">
+                D
+              </button>
+              <button class="note string-two" data-note="">2</button>
+              <button class="note string-two" data-note="">3</button>
+              <button class="note string-two" data-note="">4</button>
+              <button class="note string-two" data-note="">5</button>
+              <button class="note string-two" data-note="">6</button>
+              <button class="note string-two" data-note="">7</button>
+              <button class="note string-two" data-note="">8</button>
+            </div>
+            <div class="string" id="0">
+              <button class="open-strings string-one" id="string-one" data-note="">
+                A
+              </button>
+              <button class="note string-one" data-note="">2</button>
+              <button class="note string-one" data-note="">3</button>
+              <button class="note string-one" data-note="">4</button>
+              <button class="note string-one" data-note="">5</button>
+              <button class="note string-one" data-note="">6</button>
+              <button class="note string-one" data-note="">7</button>
+              <button class="note string-one" data-note="">8</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card p-3 border bg-light">
+            <h5 class="text-center">Controller</h5>
+            <div>
+              <input
+                type="number"
+                id="getHertz"
+                value="440"
+                min="430"
+                max="450"
+              />
+              <button class="btn btn-secondary" onclick="getHertz()">
+                Set Hertz
+              </button>
+
+              <!-- <input
+                class="form-select"
+                type="number"
+                id="getHertz"
+                value="440"
+                min="430"
+                max="450"
+              />
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="getHertz()"
+              >
+                Set Hertz
+              </button> -->
+            </div>
+
+            <div>
+              <label for="waveform">Waveform:</label>
+              <select
+                class="form-select"
+                onchange="getWaveform()"
+                name="waveform"
+                id="waveform"
+              >
+                <option value="sine">Sinewave</option>
+                <option value="triangle">Triangle</option>
+                <option value="square">Square</option>
+                <option value="sawtooth">Sawtooth</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="instrument">Instrument:</label>
+              <select
+                class="form-select"
+                onchange="getInstrument()"
+                name="instrument"
+                id="instrument"
+              >
+                <option value="cello">Cello</option>
+                <option value="violin">Violin</option>
+                <option value="viola">Viola</option>
+                <option value="bass">Bass</option>
+              </select>
+            </div>
+
+            <!-- fix this switch -->
+            <!-- <div class="form-check form-switch">
+              <label
+                class="toggle"
+                class="form-check-label"
+                for="flexSwitchCheckDefault"
+                checked
+              >
+                <span>Sustain</span>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckDefault"
+                  id="checkbox"
+                />
+              </label>
+            </div> -->
+
+            <div>
+              <label class="toggle">
+                <span>Sustain</span>
+                <input type="checkbox" id="checkbox" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+
+            <div>
+              <button type="button" class="btn btn-secondary" id="clearBtn">
+                Clear Sustain
+              </button>
+            </div>
+          </div>
+
+          <div class="card p-3 border bg-light">
+            <h5 class="text-center">Presets</h5>
+
+            <div class="pb-2">
+              <select
+                class="form-select"
+                onchange="usePreset()"
+                name="presets"
+                id="presets"
+              >
+                <option value="default">harmonicello</option>
+              </select>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex p-2">
+              <button
+                class="btn btn-secondary"
+                type="submit"
+                onclick="updatePreset()"
+              >
+                Update Preset
+              </button>
+              <!-- </div>
+
+          <div> -->
+              <button
+                class="btn btn-secondary"
+                type="submit"
+                onclick="deletePreset()"
+              >
+                Delete Preset
+              </button>
+            </div>
+
+            <div class="p-2">
+              <form>
+                <label>Name new preset:</label><br />
+                <input type="text" id="newPreset" value="" /><br />
+                <button
+                  class="btn btn-secondary"
+                  type="submit"
+                  onclick="createPreset()"
+                >
+                  Create Preset
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <footer>
+        <p>
+          Created by:
+          <a
+            href="https://www.linkedin.com/in/carolina-diazgranados/"
+            target="_blank"
+            >Carolina Diazgranados</a
+          >
+        </p>
+      </footer>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script type="application/javascript" src="./main.js"></script>
+  </body>
+</html>

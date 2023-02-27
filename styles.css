@@ -1,0 +1,88 @@
+/* change this */
+h1 {
+    padding-left: 70px; 
+}
+
+/* row */
+.harmonicello { 
+    display: flex;
+  }
+  
+  .string {
+    display: flex;
+    height: 700px;
+    width: 100px;
+    border-right: 2px solid;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+  
+  .open-strings {
+   /* background-color: steelblue; /*#4CAF50; Green */
+    height: 50px;
+    width: 50px;
+    border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    position: relative;
+    left: 30px;
+    margin-bottom: 25px;
+    visibility: visible;
+    cursor:pointer;
+  }
+  
+  .open-strings:hover{
+      filter: brightness(160%) saturate(110%); 
+  }
+  
+  .note {
+      background-color: steelblue; /* #4CAF50; Green */
+      height: 50px;
+      width: 50px;
+      border: none;
+      color: white;
+      padding: 5px;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 25px;
+      position: relative;
+      left: 30px;
+      margin-bottom: 25px;
+      visibility: visible;
+      border-radius: 50%; 
+      cursor: pointer;
+  }
+  
+  .note:hover{
+      filter: brightness(160%) saturate(110%); 
+  }
+  .border{
+      border: 3px; 
+  }
+  
+  .string-four{
+      background-color: rebeccapurple;
+  }
+  
+  .string-three{
+      background-color: slateblue;
+  }
+  
+  .string-two{
+      background-color: slategrey;
+  }
+  
+  .string-one{
+      background-color: steelblue;
+  }
+
+  
