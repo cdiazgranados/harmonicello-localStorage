@@ -201,22 +201,18 @@ function makeOscillator() {
 }
 
 drawGrid(hertz);
+
+
 //*******
-//LOCAL STORAGE
+//LOCAL STORAGE CRUD OPERATIONS
 //*******
 
+//Create
   function createPreset() {
   let newTitle = document.getElementById("newPreset").value;
   if (newTitle == ""){
     alert("Please name your new preset")
   } else {  
-  //   console.log(JSON.stringify({
-  //   title: newTitle,
-  //   hertz: hertz,
-  //   sustain: sustain,
-  //   waveform: waveform,
-  //   instrument: instrument
-  // }));
   var presetList;
   if(localStorage.getItem("presetList") == null){
     presetList = [];
@@ -237,15 +233,7 @@ drawGrid(hertz);
 }
 }
 
-function showData(){
-  var presetList;
-  if(localStorage.getItem("presetList") == null){
-    presetList = [];
-  } else {
-    presetList = JSON.parse(localStorage.getItem("presetList"))
-  }
-}
-
+//Read
 function appendData() {
   var data = JSON.parse(localStorage.getItem("presetList"));
   var mainContainer = document.getElementById("presets");
@@ -253,7 +241,7 @@ function appendData() {
     // console.log(JSON.stringify(data[i].title))
     // console.log(i);
     var option = document.createElement("option");
-    option.setAttribute("value", data[i].title);
+    option.setAttribute("value", i);
     var nod = document.createTextNode(data[i].title);
     option.appendChild(nod);
     mainContainer.appendChild(option);
@@ -262,149 +250,78 @@ function appendData() {
 
 appendData();
 
+//switch presets
+  function usePreset() {
+    let presetID = document.getElementById("presets").value;
+    if (presetID == "default") {
+          console.log("default selected");
+          hertz = defaultPreset.hertz;
+          document.getElementById("getHertz").setAttribute("value", hertz);
+          document.getElementById("getHertz").value = hertz;
+          instrument = defaultPreset.instrument;
+          const $selectInstrument = document.querySelector("#instrument");
+          $selectInstrument.value = instrument;
+          changeStrings();
+          waveform = defaultPreset.waveform;
+          const $selectWaveform = document.querySelector("#waveform");
+          $selectWaveform.value = waveform;
+          sustain = defaultPreset.sustain;
+          document.getElementById("checkbox").checked = sustain;
+        } else {
+    
+    var data = JSON.parse(localStorage.getItem("presetList"));
+    hertz = data[presetID].hertz;
+    document.getElementById("getHertz").setAttribute("value", hertz);
+    document.getElementById("getHertz").value = hertz;
+    instrument = data[presetID].instrument.toString().toLowerCase();
+    const $selectInstrument = document.querySelector("#instrument");
+    $selectInstrument.value = instrument;
+    changeStrings();
+    waveform = data[presetID].waveform.toString().toLowerCase();
+    const $selectWaveform = document.querySelector("#waveform");
+    $selectWaveform.value = waveform;
+    sustain = data[presetID].sustain;
+    document.getElementById("checkbox").checked = sustain;
+
+    drawGrid(hertz);
+        }
+  }
+
+  //Update
+  function updatePreset() {
+    let presetID = document.getElementById("presets").value;
+    let presetName = "";
+    var data = JSON.parse(localStorage.getItem("presetList"));
+    var presets = document.getElementById("presets");
+    for (var i = 0; i < presets.length; i++) {
+      var option = presets.options[i];
+      if (option.value == presetID) {
+        presetName = option.text;
+      }
+    }
+    data[presetID].title = presetName;
+    data[presetID].hertz = hertz;
+    data[presetID].sustain = sustain;
+    data[presetID].waveform = waveform;
+    data[presetID].instrument = instrument;
+  
+    localStorage.setItem('presetList', JSON.stringify(data));
+  
+  }
+
+  //Delete
+  function deletePreset() {
+  console.log("delete triggered");
+  presetID = document.getElementById("presets").value;
+  var data = JSON.parse(localStorage.getItem("presetList"));
+  console.log(data.splice(presetID, 1));
+  
+  localStorage.setItem('presetList', JSON.stringify(data));
+
+  //change this
+  location.reload();
+  location.reload();
+}
 
 
-//*******
-//SPRING BOOT CRUD OPERATIONS
-//*******
 
-// fetch("http://localhost:8080/presets/all")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     appendData(data);
-//   })
-//   .catch(function (err) {
-//     console.log("error: " + err);
-//   });
-// function appendData(data) {
-//   var mainContainer = document.getElementById("presets");
-//   for (var i = 0; i < data.length; i++) {
-//     var option = document.createElement("option");
-//     option.setAttribute("value", data[i].id);
-//     var nod = document.createTextNode(data[i].title);
-//     option.appendChild(nod);
-//     mainContainer.appendChild(option);
-//   }
-// }
-
-// function createPreset() {
-//   let newTitle = document.getElementById("newPreset").value;
-//   console.log(newTitle);
-//   fetch("http://localhost:8080/presets/add", {
-//     method: "POST",
-//     headers: {
-//       "Content-type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       title: newTitle,
-//       hertz: hertz,
-//       sustain: sustain,
-//       waveform: waveform,
-//       instrument: instrument,
-//     }),
-//   })
-//     .then((res) => res.json())
-//     .then((data) => console.log(data));
-//   location.reload();
-// }
-
-// function usePreset() {
-//   console.log("preset starts");
-//   let presetID = document.getElementById("presets").value;
-//   if (presetID == "default") {
-//     console.log("default selected");
-//     hertz = defaultPreset.hertz;
-//     document.getElementById("getHertz").setAttribute("value", hertz);
-//     document.getElementById("getHertz").value = hertz;
-//     instrument = defaultPreset.instrument;
-//     const $selectInstrument = document.querySelector("#instrument");
-//     $selectInstrument.value = instrument;
-//     changeStrings();
-//     waveform = defaultPreset.waveform;
-//     const $selectWaveform = document.querySelector("#waveform");
-//     $selectWaveform.value = waveform;
-//     sustain = defaultPreset.sustain;
-//     document.getElementById("checkbox").checked = sustain;
-//   } else {
-//     fetch("http://localhost:8080/presets/" + presetID)
-//       .then(function (response) {
-//         return response.json();
-//       })
-//       .then(function (data) {
-//         changeFields(data);
-//       })
-//       .catch(function (err) {
-//         console.log("error: " + err);
-//       });
-//   }
-
-//   function changeFields(data) {
-//     console.log("changing fields");
-//     console.log(data);
-//     console.log("hertz from db: " + data.hertz);
-
-//     hertz = data.hertz;
-//     document.getElementById("getHertz").setAttribute("value", hertz);
-//     document.getElementById("getHertz").value = hertz;
-//     instrument = data.instrument.toString().toLowerCase();
-//     const $selectInstrument = document.querySelector("#instrument");
-//     $selectInstrument.value = instrument;
-//     changeStrings();
-//     waveform = data.waveform.toString().toLowerCase();
-//     const $selectWaveform = document.querySelector("#waveform");
-//     $selectWaveform.value = waveform;
-//     sustain = data.sustain;
-//     document.getElementById("checkbox").checked = sustain;
-
-//     drawGrid(hertz);
-//   }
-// }
-
-// function updatePreset() {
-//   let presetID = document.getElementById("presets").value;
-//   let presetName = "";
-
-//   var presets = document.getElementById("presets");
-//   for (var i = 0; i < presets.length; i++) {
-//     var option = presets.options[i];
-//     if (option.value == presetID) {
-//       presetName = option.text;
-//     }
-//   }
-
-//   console.log("CURRENT PRESET NAME: " + presetName);
-//   fetch("http://localhost:8080/presets/" + presetID, {
-//     method: "PUT",
-//     headers: {
-//       "Content-type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       id: presetID,
-//       title: presetName,
-//       hertz: hertz,
-//       sustain: sustain,
-//       waveform: waveform,
-//       instrument: instrument,
-//     }),
-//   });
-
-//   //   getHertz();
-
-//   // .then((res) => res.json())
-//   // .then((data) => console.log(data));
-// }
-
-// function deletePreset() {
-//   console.log("delete triggered");
-//   presetID = document.getElementById("presets").value;
-//   fetch("http://localhost:8080/presets/" + presetID, {
-//     method: "DELETE",
-//     headers: {
-//       "Content-type": "application/json",
-//     },
-//   });
-//   location.reload();
-//   location.reload();
-// }
