@@ -1,4 +1,4 @@
-<a href="https://spontaneous-bonbon-3e95b3.netlify.app/"> # Harmonicello </a>
+# Harmonicello
 “The history of harmony is the history of the development of the human ear, which has gradually assimilated,
 in their natural order, the successive intervals of the harmonic series” -Nadia Boulanger
 
@@ -6,7 +6,7 @@ The harmonic overtone series is the basis of all tonal music and the foundation 
 It is present in nature and through man-made sounds, from chirping to blasting fire alarms.
 To better understand our instruments we must understand the harmonic series.
 Based on the natural harmonic overtone series, just intonation is required to tune double stops and chords so that
-the instrument rings with all the overtones lined up according to the overtone series. Harmonicello is a practice tool
+the instrument rings with all the overtones lined up according to the overtone series. <a href="https://spontaneous-bonbon-3e95b3.netlify.app/"> Harmonicello </a> is a practice tool
 for cellists and string players to learn how to use the harmonic series to play with improved just intonation.
 
 The Harmonicello web app maps the first eight partials of the harmonic sequence on a visual representation
