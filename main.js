@@ -1,11 +1,11 @@
 let hertz = 440;
 let waveform = "sine";
-let sustain = false;
+let sustain = true;
 let instrument = "cello";
 let defaultPreset = {
   hertz: 440,
   waveform: "sine",
-  sustain: false,
+  sustain: true,
   instrument: "cello",
 };
 let synths = {}; //holding frequency values of sustained pitches
